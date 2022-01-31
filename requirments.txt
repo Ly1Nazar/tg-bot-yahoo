@@ -1,0 +1,5 @@
+matplotlib
+pandas
+statsmodels
+telebot
+arrow
