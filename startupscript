@@ -1,4 +1,5 @@
 #!/bin/bash
-apt install python -y
+apt update
+apt install python3-pip -y
 pip install -r requirments.txt
-python main.py
+python3 main.py
