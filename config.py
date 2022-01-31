@@ -1,1 +1,1 @@
-TG_TOKEN = ""
+TG_TOKEN = "token"
