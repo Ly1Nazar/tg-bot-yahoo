@@ -37,7 +37,12 @@ def get_my_id(message):
 
 
 def check_downloads(name):
-	folder = os.listdir('data')
+	try:
+		folder = os.listdir('data')
+	except Exception:
+		os.mkdir('data')
+	finally:
+		folder = os.listdir('data')
 	for i in folder:
 		if i == str(name)+'.csv':
 			return True
