@@ -7,7 +7,6 @@ from web_scrapping import get_data
 from read_data import read_data
 from arima_prediction import predict
 from plotting import plot
-from create_db import create_db
 
 
 bot = telebot.TeleBot(TG_TOKEN)
@@ -20,11 +19,7 @@ def help(message):
 
 
 def manage_db(chat_id, msg_txt):
-	try:
-		con = sqlite3.connect('history.db')
-	except sqlite3.OperationalError:
-		create_db()
-		con = sqlite3.connect('history.db')
+	con = sqlite3.connect('history.db')
 	cur = con.cursor()
 	now = arrow.now()
 	cur.execute("INSERT INTO requests VALUES (?, ?, ?)", (now.format('DD-MM-YYYY HH:mm'), chat_id, msg_txt))

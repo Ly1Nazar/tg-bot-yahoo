@@ -2,4 +2,11 @@
 apt update
 apt install python3-pip -y
 pip install -r requirments.txt
+python3 create_db.py
 python3 main.py
+
+#cd home
+#git clone https://github.com/Ly1Nazar/tg-bot-yahoo
+#cd tg-bot-yahoo
+#chmod +x startupscript
+#./startupscript
