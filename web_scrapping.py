@@ -17,8 +17,8 @@ def get_data(name):
     download_folder = os.getcwd()
     print(download_folder)
     # download_folder = str('C:\\Users\\ASUS\\Downloads\\' + name + '.csv')
-    source = str(download_folder)+'\\'+str(name)+'.csv'
-    destination = str(download_folder) + '\\data\\' + str(name) + '.csv'
+    source = str(download_folder)+'/'+str(name)+'.csv'
+    destination = str(download_folder) + '/data/' + str(name) + '.csv'
     time.sleep(1)
     shutil.move(source, destination)
 
