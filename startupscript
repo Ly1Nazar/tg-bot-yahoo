@@ -1,0 +1,4 @@
+#!/bin/bash
+apt install python -y
+pip install -r requirments.txt
+python main.py
