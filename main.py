@@ -50,15 +50,19 @@ def check_downloads(name):
 
 
 def return_visual_for_data(data_set_name):
+
 	Date, Open, Close, Volume = read_data(data_set_name)
-	number_of_predictions = 3
-	open_predict = predict(Open, number_of_predictions)
-	close_predict = predict(Close, number_of_predictions)
-	volume_predict = predict(Volume, number_of_predictions)
-	new_idnex = [x + len(Date) - 1 for x in range(0, number_of_predictions + 1)]
-	plot(Date, Open, new_idnex, open_predict, 'open price')
-	plot(Date, Close, new_idnex, close_predict, 'close price')
-	plot(Date, Volume, new_idnex, volume_predict, 'volume')
+	if Date == "no data":
+		return "no data"
+	else:
+		number_of_predictions = 3
+		open_predict = predict(Open, number_of_predictions)
+		close_predict = predict(Close, number_of_predictions)
+		volume_predict = predict(Volume, number_of_predictions)
+		new_idnex = [x + len(Date) - 1 for x in range(0, number_of_predictions + 1)]
+		plot(Date, Open, new_idnex, open_predict, 'open price')
+		plot(Date, Close, new_idnex, close_predict, 'close price')
+		plot(Date, Volume, new_idnex, volume_predict, 'volume')
 
 
 
@@ -66,21 +70,26 @@ def return_visual_for_data(data_set_name):
 def msg_handler(message):
 	manage_db(message.from_user.id, message.text)
 	if check_downloads(message.text):
-		return_visual_for_data(message.text)
+		a = return_visual_for_data(message.text)
+		if a == "no data":
+			bot.send_message(message.from_user.id, "data error")
+		else:
+			photo = open('open price.png', 'rb')
+			bot.send_photo(message.from_user.id, photo)
+			photo = open('close price.png', 'rb')
+			bot.send_photo(message.from_user.id, photo)
+			photo = open('volume.png', 'rb')
+			bot.send_photo(message.from_user.id, photo)
 	else:
 		get_data(message.text)
-		return_visual_for_data(message.text)
-
-	photo = open('open price.png', 'rb')
-	bot.send_photo(message.from_user.id, photo)
-	photo = open('close price.png', 'rb')
-	bot.send_photo(message.from_user.id, photo)
-	photo = open('volume.png', 'rb')
-	bot.send_photo(message.from_user.id, photo)
-
-
-	# bot.send_message(message.from_user.id, str(message.from_user.id))
-	# bot.reply_to(message, message.text)
-
-
+		a = return_visual_for_data(message.text)
+		if a == "no data":
+			bot.send_message(message.from_user.id, "data error")
+		else:
+			photo = open('open price.png', 'rb')
+			bot.send_photo(message.from_user.id, photo)
+			photo = open('close price.png', 'rb')
+			bot.send_photo(message.from_user.id, photo)
+			photo = open('volume.png', 'rb')
+			bot.send_photo(message.from_user.id, photo)
 bot.polling()
